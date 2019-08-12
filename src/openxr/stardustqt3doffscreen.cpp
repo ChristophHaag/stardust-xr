@@ -50,7 +50,7 @@ void StardustQt3DOffscreen::onFrameRendered(Qt3DRender::QRenderCaptureReply *cap
                              ? memRequirements.size
                              : (memRequirements.size + memRequirements.alignment - align_mod);
 
-    uint imgData[imageSize];
+    uint *imgData = (uint*) malloc(sizeof (uint) * imageSize); // TODO: free somewhere
 
     void* data = nullptr;
     vkMapMemory(graphics->openxr->vulkan->device, stagingBufferMemory, 0, imageSize, 0, &data);
